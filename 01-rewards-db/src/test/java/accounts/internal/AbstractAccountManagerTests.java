@@ -1,9 +1,15 @@
 package accounts.internal;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import accounts.AccountManager;
 import ch.qos.logback.classic.Level;
 import common.money.MonetaryAmount;
 import common.money.Percentage;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,27 +19,18 @@ import org.springframework.transaction.annotation.Transactional;
 import rewards.internal.account.Account;
 import rewards.internal.account.Beneficiary;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 /**
  * Integration test for an account manager implementation.
- * <p>
- * Tests application behavior to verify the AccountManager and the database
- * mapping of its domain objects are correct. The implementation of the
- * AccountManager class is irrelevant to these tests, and so is the testing
- * environment (stubbing, manual, or Spring-driven configuration).
+ *
+ * <p>Tests application behavior to verify the AccountManager and the database mapping of its domain
+ * objects are correct. The implementation of the AccountManager class is irrelevant to these tests,
+ * and so is the testing environment (stubbing, manual, or Spring-driven configuration).
  */
 public abstract class AbstractAccountManagerTests {
 
     protected final Logger logger;
 
-    @Autowired
-    protected AccountManager accountManager;
+    @Autowired protected AccountManager accountManager;
 
     public AbstractAccountManagerTests() {
         logger = LoggerFactory.getLogger(getClass());
@@ -41,9 +38,7 @@ public abstract class AbstractAccountManagerTests {
             ((ch.qos.logback.classic.Logger) logger).setLevel(Level.INFO);
     }
 
-    /**
-     * Quick test to check the right profile is being used.
-     */
+    /** Quick test to check the right profile is being used. */
     @Test
     public abstract void testProfile();
 
@@ -54,9 +49,7 @@ public abstract class AbstractAccountManagerTests {
      */
     protected abstract int getNumAccountsExpected();
 
-    /**
-     * Used to log current transactional status.
-     */
+    /** Used to log current transactional status. */
     protected abstract void showStatus();
 
     @Test
@@ -82,12 +75,18 @@ public abstract class AbstractAccountManagerTests {
         Beneficiary b1 = account.getBeneficiary("Annabelle");
         assertNotNull(b1, "Annabelle should be a beneficiary");
         assertEquals(MonetaryAmount.valueOf("0.00"), b1.getSavings(), "wrong savings");
-        assertEquals(Percentage.valueOf("50%"), b1.getAllocationPercentage(), "wrong allocation percentage");
+        assertEquals(
+                Percentage.valueOf("50%"),
+                b1.getAllocationPercentage(),
+                "wrong allocation percentage");
 
         Beneficiary b2 = account.getBeneficiary("Corgan");
         assertNotNull(b2, "Corgan should be a beneficiary");
         assertEquals(MonetaryAmount.valueOf("0.00"), b2.getSavings(), "wrong savings");
-        assertEquals(Percentage.valueOf("50%"), b2.getAllocationPercentage(), "wrong allocation percentage");
+        assertEquals(
+                Percentage.valueOf("50%"),
+                b2.getAllocationPercentage(),
+                "wrong allocation percentage");
     }
 
     @Test
@@ -96,8 +95,7 @@ public abstract class AbstractAccountManagerTests {
         // FIX ME: - Manual configuration fails, Spring-driven integration tests work
         // OK.
         if (accountManager instanceof JpaAccountManager
-                && this.getClass().getAnnotation(ContextConfiguration.class) == null)
-            return;
+                && this.getClass().getAnnotation(ContextConfiguration.class) == null) return;
 
         // long newAccountId = getNumAccountsExpected();
 
@@ -107,7 +105,10 @@ public abstract class AbstractAccountManagerTests {
         showStatus();
         Account newAccount = accountManager.save(account);
 
-        assertEquals(getNumAccountsExpected() + 1, accountManager.getAllAccounts().size(), "Wrong number of accounts");
+        assertEquals(
+                getNumAccountsExpected() + 1,
+                accountManager.getAllAccounts().size(),
+                "Wrong number of accounts");
 
         newAccount = accountManager.getAccount(newAccount.getEntityId());
         assertNotNull(newAccount, "Did not find new account");
@@ -133,10 +134,14 @@ public abstract class AbstractAccountManagerTests {
         allocationPercentages.put("Corgan", Percentage.valueOf("75%"));
         accountManager.updateBeneficiaryAllocationPercentages(0L, allocationPercentages);
         Account account = accountManager.getAccount(0L);
-        assertEquals(Percentage.valueOf("25%"),
-                account.getBeneficiary("Annabelle").getAllocationPercentage(), "Invalid adjusted percentage");
-        assertEquals(Percentage.valueOf("75%"),
-                account.getBeneficiary("Corgan").getAllocationPercentage(), "Invalid adjusted percentage");
+        assertEquals(
+                Percentage.valueOf("25%"),
+                account.getBeneficiary("Annabelle").getAllocationPercentage(),
+                "Invalid adjusted percentage");
+        assertEquals(
+                Percentage.valueOf("75%"),
+                account.getBeneficiary("Corgan").getAllocationPercentage(),
+                "Invalid adjusted percentage");
     }
 
     @Test
@@ -155,8 +160,9 @@ public abstract class AbstractAccountManagerTests {
         accountManager.removeBeneficiary(0L, "Annabelle", allocationPercentages);
         Account account = accountManager.getAccount(0L);
         assertEquals(1, account.getBeneficiaries().size(), "Should only have one beneficiary");
-        assertEquals(Percentage.oneHundred(),
-                account.getBeneficiary("Corgan").getAllocationPercentage(), "Corgan should now have 100% allocation");
+        assertEquals(
+                Percentage.oneHundred(),
+                account.getBeneficiary("Corgan").getAllocationPercentage(),
+                "Corgan should now have 100% allocation");
     }
-
 }

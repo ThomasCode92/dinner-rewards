@@ -1,5 +1,7 @@
 package accounts.internal;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import config.AppConfig;
 import config.DbConfig;
 import org.junit.jupiter.api.Test;
@@ -8,12 +10,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 /**
- * Spring-driven integration test for the JPA-based account manager
- * implementation. Verifies that the JpaAccountManager works with its underlying
- * components.
+ * Spring-driven integration test for the JPA-based account manager implementation. Verifies that
+ * the JpaAccountManager works with its underlying components.
  */
 @ActiveProfiles("jpa")
 @ExtendWith(SpringExtension.class)
@@ -23,7 +22,9 @@ public class JpaAccountManagerIntegrationTests extends AbstractDatabaseAccountMa
     @Test
     @Override
     public void testProfile() {
-        assertEquals("JPA", accountManager.getInfo(), "JPA expected but found " + accountManager.getInfo());
+        assertEquals(
+                "JPA",
+                accountManager.getInfo(),
+                "JPA expected but found " + accountManager.getInfo());
     }
-
 }

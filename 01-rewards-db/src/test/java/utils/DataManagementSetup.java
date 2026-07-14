@@ -1,5 +1,9 @@
 package utils;
 
+import java.util.Properties;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -8,14 +12,7 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-import java.util.Properties;
-
-/**
- * Set up a JPA data-management layer without using Spring (for testing).
- */
+/** Set up a JPA data-management layer without using Spring (for testing). */
 public class DataManagementSetup {
 
     public static final String DOMAIN_OBJECTS_PARENT_PACKAGE = "rewards.internal";
@@ -24,8 +21,7 @@ public class DataManagementSetup {
     private EntityManagerFactory entityManagerFactory;
     private PlatformTransactionManager transactionManager;
 
-    public DataManagementSetup() {
-    }
+    public DataManagementSetup() {}
 
     private void setup() {
         if (dataSource == null) {
@@ -53,7 +49,8 @@ public class DataManagementSetup {
     // - - - - - - - - - - - - - - - INTERNAL METHODS - - - - - - - - - - - - - - -
 
     protected DataSource createTestDataSource() {
-        return new EmbeddedDatabaseBuilder().setName("rewards") //
+        return new EmbeddedDatabaseBuilder()
+                .setName("rewards") //
                 .addScript("/rewards/testdb/schema.sql") //
                 .addScript("/rewards/testdb/data.sql") //
                 .build();
@@ -81,7 +78,8 @@ public class DataManagementSetup {
     protected final EntityManagerFactory createEntityManagerFactory() {
 
         // Create a FactoryBean to help create a JPA EntityManagerFactory
-        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean factoryBean =
+                new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setJpaVendorAdapter(createVendorAdapter());
         factoryBean.setJpaProperties(createJpaProperties());
@@ -96,5 +94,4 @@ public class DataManagementSetup {
         // get the created session factory
         return factoryBean.getObject();
     }
-
 }

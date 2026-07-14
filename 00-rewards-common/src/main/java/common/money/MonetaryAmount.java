@@ -2,16 +2,15 @@ package common.money;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import javax.persistence.Embeddable;
 
 /**
  * A representation of money.
- * <p>
- * A value object. Immutable.
+ *
+ * <p>A value object. Immutable.
  */
 @Embeddable
 public class MonetaryAmount implements Serializable {
@@ -23,7 +22,8 @@ public class MonetaryAmount implements Serializable {
     /**
      * Create a new monetary amount from the specified value.
      *
-     * @param value the value of the amount; for example, in $USD "10.00" would be ten dollars, ".29" would be 29 cents
+     * @param value the value of the amount; for example, in $USD "10.00" would be ten dollars,
+     *     ".29" would be 29 cents
      */
     @JsonCreator
     public MonetaryAmount(BigDecimal value) {
@@ -40,11 +40,11 @@ public class MonetaryAmount implements Serializable {
     }
 
     @SuppressWarnings("unused")
-    private MonetaryAmount() {
-    }
+    private MonetaryAmount() {}
 
     /**
-     * Convert the string representation of a monetary amount (e.g., $5 or 5) to a MonetaryAmount object.
+     * Convert the string representation of a monetary amount (e.g., $5 or 5) to a MonetaryAmount
+     * object.
      *
      * @param string the monetary amount string
      * @return the monetary amount object
@@ -61,9 +61,7 @@ public class MonetaryAmount implements Serializable {
         return new MonetaryAmount(value);
     }
 
-    /**
-     * Returns the zero (0.00) monetary amount.
-     */
+    /** Returns the zero (0.00) monetary amount. */
     public static MonetaryAmount zero() {
         return new MonetaryAmount(0);
     }
@@ -143,7 +141,8 @@ public class MonetaryAmount implements Serializable {
     }
 
     /**
-     * Get this amount as a double. Useful for when a double type is needed by an external API or system.
+     * Get this amount as a double. Useful for when a double type is needed by an external API or
+     * system.
      *
      * @return this amount as a double
      */
@@ -152,7 +151,8 @@ public class MonetaryAmount implements Serializable {
     }
 
     /**
-     * Get this amount as a big decimal. Useful for when a BigDecimal type is needed by an external API or system.
+     * Get this amount as a big decimal. Useful for when a BigDecimal type is needed by an external
+     * API or system.
      *
      * @return this amount as a big decimal
      */
@@ -175,5 +175,4 @@ public class MonetaryAmount implements Serializable {
     public String toString() {
         return "$" + value.toString();
     }
-
 }

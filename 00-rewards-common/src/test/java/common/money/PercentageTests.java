@@ -1,14 +1,11 @@
 package common.money;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * Unit tests that make sure the Percentage class works in isolation.
- */
-public class PercentageTests {
+import org.junit.jupiter.api.Test;
 
+/** Unit tests that make sure the Percentage class works in isolation. */
+public class PercentageTests {
 
     @Test
     public void testPercentageValueOfString() {

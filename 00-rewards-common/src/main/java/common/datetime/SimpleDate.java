@@ -7,7 +7,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * A simple wrapper around a calendar for working with dates like 12/29/1977. Does not consider time.
+ * A simple wrapper around a calendar for working with dates like 12/29/1977. Does not consider
+ * time.
  */
 public class SimpleDate implements Serializable {
 
@@ -19,8 +20,8 @@ public class SimpleDate implements Serializable {
      * Create a new simple date.
      *
      * @param month the month
-     * @param day   the day
-     * @param year  the year
+     * @param day the day
+     * @param year the year
      */
     public SimpleDate(int month, int day, int year) {
         init(new GregorianCalendar(year, month - 1, day));
@@ -36,15 +37,14 @@ public class SimpleDate implements Serializable {
         init(new GregorianCalendar());
     }
 
-    /**
-     * Returns today's date. A convenient static factory method.
-     */
+    /** Returns today's date. A convenient static factory method. */
     public static SimpleDate today() {
         return new SimpleDate();
     }
 
     /**
-     * Converts the specified date to a SimpleDate. Will trim hour, minute, second, and millisecond fields.
+     * Converts the specified date to a SimpleDate. Will trim hour, minute, second, and millisecond
+     * fields.
      *
      * @param date the java.util.Date
      * @return the simple date
@@ -54,7 +54,8 @@ public class SimpleDate implements Serializable {
     }
 
     /**
-     * Converts the specified long time value to a SimpleDate. Will trim hour, minute, second, and millisecond fields.
+     * Converts the specified long time value to a SimpleDate. Will trim hour, minute, second, and
+     * millisecond fields.
      *
      * @param time time in milliseconds since 1970
      * @return the time as a SimpleDate
@@ -114,5 +115,4 @@ public class SimpleDate implements Serializable {
     public String toString() {
         return new SimpleDateFormat().format(base.getTime());
     }
-
 }

@@ -1,20 +1,19 @@
 package accounts;
 
 import common.money.Percentage;
-import rewards.internal.account.Account;
-
 import java.util.List;
 import java.util.Map;
+import rewards.internal.account.Account;
 
 /**
- * Manages access to account information. Used as the service layer component in
- * the <tt>mvc</tt> and <tt>security</tt> projects.
+ * Manages access to account information. Used as the service layer component in the <tt>mvc</tt>
+ * and <tt>security</tt> projects.
  */
 public interface AccountManager {
 
     /**
-     * Indicates implementation being used. Actual implementation is hidden
-     * behind a proxy, so this makes it easy to determine.
+     * Indicates implementation being used. Actual implementation is hidden behind a proxy, so this
+     * makes it easy to determine.
      *
      * @return Implementation information.
      */
@@ -39,8 +38,8 @@ public interface AccountManager {
      * Takes a transient account and persists it.
      *
      * @param account The account to save
-     * @return The persistent account - this may or may not be the same object
-     * as the method argument.
+     * @return The persistent account - this may or may not be the same object as the method
+     *     argument.
      */
     Account save(Account account);
 
@@ -52,21 +51,19 @@ public interface AccountManager {
     void update(Account account);
 
     /**
-     * Updates the allocation percentages for the entire collection of
-     * beneficiaries in an account
+     * Updates the allocation percentages for the entire collection of beneficiaries in an account
      *
-     * @param accountId             the account id
-     * @param allocationPercentages A map of beneficiary names and allocation percentages, keyed
-     *                              by beneficiary name
+     * @param accountId the account id
+     * @param allocationPercentages A map of beneficiary names and allocation percentages, keyed by
+     *     beneficiary name
      */
-    void updateBeneficiaryAllocationPercentages(Long accountId,
-                                                Map<String, Percentage> allocationPercentages);
+    void updateBeneficiaryAllocationPercentages(
+            Long accountId, Map<String, Percentage> allocationPercentages);
 
     /**
-     * Adds a beneficiary to an account. The new beneficiary will have a 0
-     * allocation percentage.
+     * Adds a beneficiary to an account. The new beneficiary will have a 0 allocation percentage.
      *
-     * @param accountId       the account id
+     * @param accountId the account id
      * @param beneficiaryName the name of the beneficiary to remove
      */
     void addBeneficiary(Long accountId, String beneficiaryName);
@@ -74,10 +71,10 @@ public interface AccountManager {
     /**
      * Removes a beneficiary from an account.
      *
-     * @param accountId             the account id
-     * @param beneficiaryName       the name of the beneficiary to remove
+     * @param accountId the account id
+     * @param beneficiaryName the name of the beneficiary to remove
      * @param allocationPercentages new allocation percentages, keyed by beneficiary name
      */
-    void removeBeneficiary(Long accountId, String beneficiaryName,
-                           Map<String, Percentage> allocationPercentages);
+    void removeBeneficiary(
+            Long accountId, String beneficiaryName, Map<String, Percentage> allocationPercentages);
 }

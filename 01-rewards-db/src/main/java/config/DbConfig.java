@@ -1,5 +1,8 @@
 package config;
 
+import java.util.Properties;
+import java.util.logging.Logger;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,17 +18,13 @@ import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.sql.DataSource;
-import java.util.Properties;
-import java.util.logging.Logger;
-
 /**
- * Configuration class for Persistence-specific objects, including profile
- * choices for JPA via Hibernate or JPA via EclipseLink. Only used by tests in
- * this class (since Spring Boot cannot be assumed).
- * <p>
- * To simulate Spring Boot we load <code>application.properties</code> manually,
- * if it exists, and mimic Boot's <code>spring.jpa.show-sql</code> property.
+ * Configuration class for Persistence-specific objects, including profile choices for JPA via
+ * Hibernate or JPA via EclipseLink. Only used by tests in this class (since Spring Boot cannot be
+ * assumed).
+ *
+ * <p>To simulate Spring Boot we load <code>application.properties</code> manually, if it exists,
+ * and mimic Boot's <code>spring.jpa.show-sql</code> property.
  */
 @Configuration
 @PropertySource(value = "application.properties", ignoreResourceNotFound = true)
@@ -33,31 +32,25 @@ public class DbConfig {
 
     public static final String DOMAIN_OBJECTS_PARENT_PACKAGE = "rewards.internal";
 
-    @Value("${spring.jpa.show-sql:true}")  // Default to true if not set elsewhere
+    @Value("${spring.jpa.show-sql:true}") // Default to true if not set elsewhere
     private String showSql;
 
-    /**
-     * Creates an in-memory "rewards" database populated with test data for fast
-     * testing
-     */
+    /** Creates an in-memory "rewards" database populated with test data for fast testing */
     @Bean
     public DataSource dataSource() {
         return (new EmbeddedDatabaseBuilder()) //
                 .addScript("classpath:rewards/testdb/schema.sql") //
-                .addScript("classpath:rewards/testdb/data.sql").build();
+                .addScript("classpath:rewards/testdb/data.sql")
+                .build();
     }
 
-    /**
-     * Transaction Manager For JPA
-     */
+    /** Transaction Manager For JPA */
     @Bean
     public PlatformTransactionManager transactionManager() {
         return new JpaTransactionManager();
     }
 
-    /**
-     * Create an EntityManagerFactoryBean.
-     */
+    /** Create an EntityManagerFactoryBean. */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(JpaVendorAdapter adapter) {
 
@@ -92,16 +85,15 @@ public class DbConfig {
 
     @Bean
     @Profile("!jpa-elink")
-        // Default is to use Hibernate with JPA
+    // Default is to use Hibernate with JPA
     JpaVendorAdapter hibernateVendorAdapter() {
         return new HibernateJpaVendorAdapter();
     }
 
     @Bean
     @Profile("jpa-elink")
-        // Explicitly request JPA using EclipseLink
+    // Explicitly request JPA using EclipseLink
     JpaVendorAdapter eclipseLinkVendorAdapter() {
         return new EclipseLinkJpaVendorAdapter();
     }
-
 }

@@ -6,12 +6,13 @@ import java.text.ParseException;
 import java.util.Locale;
 
 /**
- * A formatter for Simple date properties. Converts object values to well-formatted strings and strings back to
- * values. Usable by a data binding framework for binding user input to the model.
+ * A formatter for Simple date properties. Converts object values to well-formatted strings and
+ * strings back to values. Usable by a data binding framework for binding user input to the model.
  */
 public class SimpleDateEditor extends PropertyEditorSupport {
 
-    private final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG, Locale.ENGLISH);
+    private final DateFormat dateFormat =
+            DateFormat.getDateInstance(DateFormat.LONG, Locale.ENGLISH);
 
     @Override
     public String getAsText() {
@@ -28,7 +29,8 @@ public class SimpleDateEditor extends PropertyEditorSupport {
         try {
             setValue(SimpleDate.valueOf(dateFormat.parse(text)));
         } catch (ParseException e) {
-            throw new IllegalArgumentException("Unable to convert String '" + text + "' to a SimpleDate", e);
+            throw new IllegalArgumentException(
+                    "Unable to convert String '" + text + "' to a SimpleDate", e);
         }
     }
 }

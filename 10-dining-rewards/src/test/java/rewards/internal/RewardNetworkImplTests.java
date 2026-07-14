@@ -1,5 +1,8 @@
 package rewards.internal;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import common.money.MonetaryAmount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -11,25 +14,18 @@ import rewards.internal.account.AccountRepository;
 import rewards.internal.restaurant.RestaurantRepository;
 import rewards.internal.reward.RewardRepository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 /**
- * Unit tests for the RewardNetworkImpl application logic.
- * Configures the implementation with stub repositories
- * containing dummy data for fast in-memory testing without
- * the overhead of an external data source.
- * <p>
- * Besides helping catch bugs early, tests are a great way
- * for a new developer to learn an API as he or she can see the
- * API in action. Tests also help validate a design as they
- * are a measure of how easy it is to use your code.
+ * Unit tests for the RewardNetworkImpl application logic. Configures the implementation with stub
+ * repositories containing dummy data for fast in-memory testing without the overhead of an external
+ * data source.
+ *
+ * <p>Besides helping catch bugs early, tests are a great way for a new developer to learn an API as
+ * he or she can see the API in action. Tests also help validate a design as they are a measure of
+ * how easy it is to use your code.
  */
 public class RewardNetworkImplTests {
 
-    /**
-     * The object being tested.
-     */
+    /** The object being tested. */
     private RewardNetworkImpl rewardNetwork;
 
     // TODO-09: Review the test setup
@@ -51,7 +47,8 @@ public class RewardNetworkImplTests {
     @Test
     @Disabled
     public void testRewardForDining() {
-        // create a new dining of 100.00 charged to credit card '1,234,123,412,341,234' by merchant '123,457,890' as test input
+        // create a new dining of 100.00 charged to credit card '1,234,123,412,341,234' by merchant
+        // '123,457,890' as test input
         Dining dining = Dining.createDining("100.00", "1234123412341234", "1234567890");
 
         // call the 'rewardNetwork' to test its rewardAccountFor(Dining) method
@@ -75,7 +72,10 @@ public class RewardNetworkImplTests {
         assertEquals(2, contribution.getDistributions().size());
 
         // each distribution should be 4.00 (as both have a 50% allocation)
-        assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Annabelle").getAmount());
-        assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Corgan").getAmount());
+        assertEquals(
+                MonetaryAmount.valueOf("4.00"),
+                contribution.getDistribution("Annabelle").getAmount());
+        assertEquals(
+                MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Corgan").getAmount());
     }
 }

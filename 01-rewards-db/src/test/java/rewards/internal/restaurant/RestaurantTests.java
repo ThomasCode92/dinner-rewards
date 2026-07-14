@@ -1,5 +1,7 @@
 package rewards.internal.restaurant;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import common.money.MonetaryAmount;
 import common.money.Percentage;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,11 +9,10 @@ import org.junit.jupiter.api.Test;
 import rewards.Dining;
 import rewards.internal.account.Account;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 /**
- * Unit tests for exercising the behavior of the Restaurant aggregate entity. A restaurant calculates a benefit to award
- * to an account for dining based on an availability policy and benefit percentage.
+ * Unit tests for exercising the behavior of the Restaurant aggregate entity. A restaurant
+ * calculates a benefit to award to an account for dining based on an availability policy and
+ * benefit percentage.
  */
 public class RestaurantTests {
 
@@ -48,9 +49,10 @@ public class RestaurantTests {
     }
 
     /**
-     * A simple "dummy" benefit availability policy containing a single flag used to determine if benefit is available.
-     * Only useful for testing--a real availability policy might consider many factors such as the day of week of the
-     * dining, or the account's reward history for the current month.
+     * A simple "dummy" benefit availability policy containing a single flag used to determine if
+     * benefit is available. Only useful for testing--a real availability policy might consider many
+     * factors such as the day of week of the dining, or the account's reward history for the
+     * current month.
      */
     private static class StubBenefitAvailabilityPolicy implements BenefitAvailabilityPolicy {
 

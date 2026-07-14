@@ -3,9 +3,7 @@ package rewards.internal.restaurant;
 import rewards.Dining;
 import rewards.internal.account.Account;
 
-/**
- * A benefit availability policy that returns false at all times.
- */
+/** A benefit availability policy that returns false at all times. */
 public class NeverAvailable implements BenefitAvailabilityPolicy {
     static final BenefitAvailabilityPolicy INSTANCE = new NeverAvailable();
 

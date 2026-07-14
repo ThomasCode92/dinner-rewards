@@ -7,8 +7,7 @@ public class AccountManagerTests extends AbstractAccountManagerTests {
     }
 
     @Override
-    public void testProfile() {
-    }
+    public void testProfile() {}
 
     @Override
     protected int getNumAccountsExpected() {
@@ -16,7 +15,5 @@ public class AccountManagerTests extends AbstractAccountManagerTests {
     }
 
     @Override
-    protected void showStatus() {
-    }
-
+    protected void showStatus() {}
 }

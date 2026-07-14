@@ -1,5 +1,7 @@
 package rewards.internal.restaurant;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import config.AppConfig;
 import config.DbConfig;
 import org.junit.jupiter.api.Test;
@@ -8,12 +10,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 /**
- * Integration test for the JPA-based restaurant repository implementation.
- * Verifies that the JpaRestaurantRepository works with its underlying
- * components and that Spring is configuring things properly.
+ * Integration test for the JPA-based restaurant repository implementation. Verifies that the
+ * JpaRestaurantRepository works with its underlying components and that Spring is configuring
+ * things properly.
  */
 @ActiveProfiles("jpa")
 @ExtendWith(SpringExtension.class)
@@ -23,7 +23,9 @@ public class JpaRestaurantRepositoryIntegrationTests extends AbstractRestaurantR
     @Test
     @Override
     public void testProfile() {
-        assertEquals(JpaRestaurantRepository.INFO, restaurantRepository.getInfo(), "JPA expected but found " + restaurantRepository.getInfo());
+        assertEquals(
+                JpaRestaurantRepository.INFO,
+                restaurantRepository.getInfo(),
+                "JPA expected but found " + restaurantRepository.getInfo());
     }
-
 }

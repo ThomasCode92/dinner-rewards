@@ -1,33 +1,28 @@
 package accounts.internal;
 
+import javax.sql.DataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import utils.TransactionUtils;
 
-import javax.sql.DataSource;
-
 /**
- * Supports transactional testing of AccountManager implementation in both a
- * manual and a Spring-configured environment.
- * <p>
- * Manual configuration allows testing of an AccountManager implementation
- * without Spring.
- * <p>
- * Automated configuration using a class annotated with @ContextConfiguration
- * tests both the implementation of AccountManager and the Spring configuration
- * files.
+ * Supports transactional testing of AccountManager implementation in both a manual and a
+ * Spring-configured environment.
+ *
+ * <p>Manual configuration allows testing of an AccountManager implementation without Spring.
+ *
+ * <p>Automated configuration using a class annotated with @ContextConfiguration tests both the
+ * implementation of AccountManager and the Spring configuration files.
  */
 public abstract class AbstractDatabaseAccountManagerTests extends AbstractAccountManagerTests {
 
     protected static int numAccountsInDb = -1;
 
-    @Autowired
-    protected PlatformTransactionManager transactionManager;
+    @Autowired protected PlatformTransactionManager transactionManager;
 
-    @Autowired
-    protected DataSource dataSource;
+    @Autowired protected DataSource dataSource;
 
     protected TransactionUtils transactionUtils;
 
@@ -41,8 +36,9 @@ public abstract class AbstractDatabaseAccountManagerTests extends AbstractAccoun
         // The number of test accounts in the database - a static variable, so we only do
         // this once.
         if (numAccountsInDb == -1)
-            numAccountsInDb = new JdbcTemplate(dataSource).queryForObject("SELECT count(*) FROM T_Account",
-                    Integer.class);
+            numAccountsInDb =
+                    new JdbcTemplate(dataSource)
+                            .queryForObject("SELECT count(*) FROM T_Account", Integer.class);
 
         // Set up the transaction utility class
         transactionUtils = new TransactionUtils(transactionManager);

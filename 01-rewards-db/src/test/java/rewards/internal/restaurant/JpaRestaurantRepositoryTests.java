@@ -1,5 +1,7 @@
 package rewards.internal.restaurant;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,12 +10,9 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import utils.DataManagementSetup;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-
 /**
- * Manually configured integration test for the JPA-based restaurant repository
- * implementation. Tests repository behavior and verifies the Restaurant JPA
- * mapping is correct.
+ * Manually configured integration test for the JPA-based restaurant repository implementation.
+ * Tests repository behavior and verifies the Restaurant JPA mapping is correct.
  */
 public class JpaRestaurantRepositoryTests extends AbstractRestaurantRepositoryTests {
 
@@ -43,8 +42,6 @@ public class JpaRestaurantRepositoryTests extends AbstractRestaurantRepositoryTe
     @AfterEach
     public void tearDown() {
         // rollback the transaction to avoid corrupting other tests
-        if (transactionManager != null)
-            transactionManager.rollback(transactionStatus);
+        if (transactionManager != null) transactionManager.rollback(transactionStatus);
     }
-
 }

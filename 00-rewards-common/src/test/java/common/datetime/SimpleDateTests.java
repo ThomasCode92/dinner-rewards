@@ -1,16 +1,15 @@
 package common.datetime;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 /**
- * Unit tests for the "Simple Date" wrapper around a Calendar that tracks
- * month/date/year only, with no provision for tracking time.
+ * Unit tests for the "Simple Date" wrapper around a Calendar that tracks month/date/year only, with
+ * no provision for tracking time.
  */
 public class SimpleDateTests {
 

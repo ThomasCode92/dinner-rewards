@@ -2,13 +2,13 @@ package rewards;
 
 import common.money.MonetaryAmount;
 import common.money.Percentage;
-
 import java.util.Set;
 
 /**
- * A summary of a monetary contribution made to an account that was distributed among the account's beneficiaries.
- * <p>
- * A value object. Immutable.
+ * A summary of a monetary contribution made to an account that was distributed among the account's
+ * beneficiaries.
+ *
+ * <p>A value object. Immutable.
  */
 public class AccountContribution {
 
@@ -20,10 +20,11 @@ public class AccountContribution {
      * Creates a new account contribution.
      *
      * @param accountNumber the number of the account the contribution was made
-     * @param amount        the total contribution amount
+     * @param amount the total contribution amount
      * @param distributions how the contribution was distributed among the account's beneficiaries
      */
-    public AccountContribution(String accountNumber, MonetaryAmount amount, Set<Distribution> distributions) {
+    public AccountContribution(
+            String accountNumber, MonetaryAmount amount, Set<Distribution> distributions) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.distributions = distributions;
@@ -72,14 +73,19 @@ public class AccountContribution {
     }
 
     public String toString() {
-        return "Contribution of " + amount + " to account '" + accountNumber + "' distributed " + distributions;
+        return "Contribution of "
+                + amount
+                + " to account '"
+                + accountNumber
+                + "' distributed "
+                + distributions;
     }
 
     /**
-     * A single distribution made to a beneficiary as part of an account contribution, summarizing the distribution
-     * amount and resulting total beneficiary savings.
-     * <p>
-     * A value object.
+     * A single distribution made to a beneficiary as part of an account contribution, summarizing
+     * the distribution amount and resulting total beneficiary savings.
+     *
+     * <p>A value object.
      */
     public static class Distribution {
 
@@ -91,43 +97,39 @@ public class AccountContribution {
         /**
          * Creates a new distribution.
          *
-         * @param beneficiary  the name of the account beneficiary that received a distribution
-         * @param amount       the distribution amount
-         * @param percentage   this distribution's percentage of the total account contribution
-         * @param totalSavings the beneficiary's total savings amount after the distribution was made
+         * @param beneficiary the name of the account beneficiary that received a distribution
+         * @param amount the distribution amount
+         * @param percentage this distribution's percentage of the total account contribution
+         * @param totalSavings the beneficiary's total savings amount after the distribution was
+         *     made
          */
-        public Distribution(String beneficiary, MonetaryAmount amount, Percentage percentage,
-                            MonetaryAmount totalSavings) {
+        public Distribution(
+                String beneficiary,
+                MonetaryAmount amount,
+                Percentage percentage,
+                MonetaryAmount totalSavings) {
             this.beneficiary = beneficiary;
             this.percentage = percentage;
             this.amount = amount;
             this.totalSavings = totalSavings;
         }
 
-        /**
-         * Returns the name of the beneficiary.
-         */
+        /** Returns the name of the beneficiary. */
         public String getBeneficiary() {
             return beneficiary;
         }
 
-        /**
-         * Returns the amount of this distribution.
-         */
+        /** Returns the amount of this distribution. */
         public MonetaryAmount getAmount() {
             return amount;
         }
 
-        /**
-         * Returns the percentage of this distribution relative to others in the contribution.
-         */
+        /** Returns the percentage of this distribution relative to others in the contribution. */
         public Percentage getPercentage() {
             return percentage;
         }
 
-        /**
-         * Returns the total savings of the beneficiary after this distribution.
-         */
+        /** Returns the total savings of the beneficiary after this distribution. */
         public MonetaryAmount getTotalSavings() {
             return totalSavings;
         }

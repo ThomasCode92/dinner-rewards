@@ -1,20 +1,17 @@
 package accounts.internal;
 
 import common.money.Percentage;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import rewards.internal.account.Account;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import rewards.internal.account.Account;
 
-/**
- * An account manager that uses JPA to find accounts.
- */
+/** An account manager that uses JPA to find accounts. */
 @Repository
 public class JpaAccountManager extends AbstractAccountManager {
 
@@ -22,12 +19,10 @@ public class JpaAccountManager extends AbstractAccountManager {
 
     /**
      * Creates a new JPA account manager.
-     * <p>
-     * Its entityManager will be set automatically by
-     * {@link #setEntityManager(EntityManager)}.
+     *
+     * <p>Its entityManager will be set automatically by {@link #setEntityManager(EntityManager)}.
      */
-    public JpaAccountManager() {
-    }
+    public JpaAccountManager() {}
 
     @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
@@ -38,16 +33,17 @@ public class JpaAccountManager extends AbstractAccountManager {
     @Transactional(readOnly = true)
     @SuppressWarnings("unchecked")
     public List<Account> getAllAccounts() {
-        List<Account> l = entityManager.createQuery("select a from Account a LEFT JOIN FETCH a.beneficiaries")
-                .getResultList();
+        List<Account> l =
+                entityManager
+                        .createQuery("select a from Account a LEFT JOIN FETCH a.beneficiaries")
+                        .getResultList();
 
         // Use of "JOIN FETCH" produces duplicate accounts, and DISTINCT does
         // not address this. So we have to filter it manually.
         List<Account> result = new ArrayList<>();
 
         for (Account a : l) {
-            if (!result.contains(a))
-                result.add(a);
+            if (!result.contains(a)) result.add(a);
         }
 
         return result;
@@ -81,7 +77,8 @@ public class JpaAccountManager extends AbstractAccountManager {
 
     @Override
     @Transactional
-    public void updateBeneficiaryAllocationPercentages(Long accountId, Map<String, Percentage> allocationPercentages) {
+    public void updateBeneficiaryAllocationPercentages(
+            Long accountId, Map<String, Percentage> allocationPercentages) {
         Account account = getAccount(accountId);
         for (Entry<String, Percentage> entry : allocationPercentages.entrySet()) {
             account.getBeneficiary(entry.getKey()).setAllocationPercentage(entry.getValue());
@@ -96,12 +93,11 @@ public class JpaAccountManager extends AbstractAccountManager {
 
     @Override
     @Transactional
-    public void removeBeneficiary(Long accountId, String beneficiaryName,
-                                  Map<String, Percentage> allocationPercentages) {
+    public void removeBeneficiary(
+            Long accountId, String beneficiaryName, Map<String, Percentage> allocationPercentages) {
         getAccount(accountId).removeBeneficiary(beneficiaryName);
 
         if (allocationPercentages != null)
             updateBeneficiaryAllocationPercentages(accountId, allocationPercentages);
     }
-
 }

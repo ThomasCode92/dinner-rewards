@@ -1,17 +1,15 @@
 package rewards.internal.account;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import common.money.MonetaryAmount;
 import common.money.Percentage;
 import org.junit.jupiter.api.Test;
 import rewards.AccountContribution;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-/**
- * Unit tests for the Account class that verify Account behavior work in isolation.
- */
+/** Unit tests for the Account class that verify Account behavior work in isolation. */
 public class AccountTests {
 
     private final Account account = new Account("1", "Keith and Keri Donald");
@@ -47,9 +45,14 @@ public class AccountTests {
     public void makeContribution() {
         account.addBeneficiary("Annabelle", Percentage.valueOf("50%"));
         account.addBeneficiary("Corgan", Percentage.valueOf("50%"));
-        AccountContribution contribution = account.makeContribution(MonetaryAmount.valueOf("100.00"));
+        AccountContribution contribution =
+                account.makeContribution(MonetaryAmount.valueOf("100.00"));
         assertEquals(contribution.getAmount(), MonetaryAmount.valueOf("100.00"));
-        assertEquals(MonetaryAmount.valueOf("50.00"), contribution.getDistribution("Annabelle").getAmount());
-        assertEquals(MonetaryAmount.valueOf("50.00"), contribution.getDistribution("Corgan").getAmount());
+        assertEquals(
+                MonetaryAmount.valueOf("50.00"),
+                contribution.getDistribution("Annabelle").getAmount());
+        assertEquals(
+                MonetaryAmount.valueOf("50.00"),
+                contribution.getDistribution("Corgan").getAmount());
     }
 }

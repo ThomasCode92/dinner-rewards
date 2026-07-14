@@ -1,16 +1,15 @@
 package accounts.internal;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utils.DataManagementSetup;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-
 /**
- * Manually configured integration test (not using Spring) for the JPA-based
- * account manager implementation. Verifies that the JpaAccountManager works
- * with its underlying components.
+ * Manually configured integration test (not using Spring) for the JPA-based account manager
+ * implementation. Verifies that the JpaAccountManager works with its underlying components.
  */
 public class JpaAccountManagerManualIntegrationTests extends AbstractDatabaseAccountManagerTests {
 
@@ -47,5 +46,4 @@ public class JpaAccountManagerManualIntegrationTests extends AbstractDatabaseAcc
         this.accountManager = accountManager;
         transactionManager = dataManagementSetup.getTransactionManager();
     }
-
 }

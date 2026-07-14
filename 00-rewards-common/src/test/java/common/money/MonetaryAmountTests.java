@@ -1,14 +1,11 @@
 package common.money;
 
-import org.junit.jupiter.api.Test;
-
-import java.math.BigDecimal;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * Unit tests that make sure the MonetaryAmount class works in isolation.
- */
+import java.math.BigDecimal;
+import org.junit.jupiter.api.Test;
+
+/** Unit tests that make sure the MonetaryAmount class works in isolation. */
 public class MonetaryAmountTests {
     @Test
     public void testMonetaryAmountValueOfString() {

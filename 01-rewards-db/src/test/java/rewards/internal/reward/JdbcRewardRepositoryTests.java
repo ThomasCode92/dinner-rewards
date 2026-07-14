@@ -1,16 +1,15 @@
 package rewards.internal.reward;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+
+import javax.sql.DataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 
-import javax.sql.DataSource;
-
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-
 /**
- * Tests the JDBC reward repository with a test data source to test repository
- * behavior and verifies the Reward JDBC code is correct.
+ * Tests the JDBC reward repository with a test data source to test repository behavior and verifies
+ * the Reward JDBC code is correct.
  */
 public class JdbcRewardRepositoryTests extends AbstractRewardRepositoryTests {
 
@@ -27,8 +26,10 @@ public class JdbcRewardRepositoryTests extends AbstractRewardRepositoryTests {
     }
 
     private DataSource createTestDataSource() {
-        return new EmbeddedDatabaseBuilder().setName("rewards")
+        return new EmbeddedDatabaseBuilder()
+                .setName("rewards")
                 .addScript("/rewards/testdb/schema.sql")
-                .addScript("/rewards/testdb/data.sql").build();
+                .addScript("/rewards/testdb/data.sql")
+                .build();
     }
 }

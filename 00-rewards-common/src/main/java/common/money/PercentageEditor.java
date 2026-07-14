@@ -1,12 +1,11 @@
 package common.money;
 
+import java.beans.PropertyEditorSupport;
 import org.springframework.util.StringUtils;
 
-import java.beans.PropertyEditorSupport;
-
 /**
- * A formatter for Percentage properties. Converts object values to well-formatted strings and strings back to values.
- * Usable by a data binding framework for binding user input to the model.
+ * A formatter for Percentage properties. Converts object values to well-formatted strings and
+ * strings back to values. Usable by a data binding framework for binding user input to the model.
  */
 public class PercentageEditor extends PropertyEditorSupport {
 
@@ -28,5 +27,4 @@ public class PercentageEditor extends PropertyEditorSupport {
             setValue(null);
         }
     }
-
 }

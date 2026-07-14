@@ -1,20 +1,19 @@
 package rewards.internal.restaurant;
 
 import common.money.Percentage;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import rewards.Dining;
 import rewards.internal.account.Account;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * A dummy restaurant repository implementation. Has a single restaurant "Apple Bees" with an 8% benefit availability
- * percentage that's always available.
- * <p>
- * Stubs facilitate unit testing. An object needing a RestaurantRepository can work with this stub and not have to bring
- * in expensive and/or complex dependencies such as a Database. Simple unit tests can then verify object behavior by
- * considering the state of this stub.
+ * A dummy restaurant repository implementation. Has a single restaurant "Apple Bees" with an 8%
+ * benefit availability percentage that's always available.
+ *
+ * <p>Stubs facilitate unit testing. An object needing a RestaurantRepository can work with this
+ * stub and not have to bring in expensive and/or complex dependencies such as a Database. Simple
+ * unit tests can then verify object behavior by considering the state of this stub.
  */
 public class StubRestaurantRepository implements RestaurantRepository {
 
@@ -49,9 +48,9 @@ public class StubRestaurantRepository implements RestaurantRepository {
     }
 
     /**
-     * A simple "dummy" benefit availability policy that always returns true. Only useful for testing--a real
-     * availability policy might consider many factors such as the day of week of the dining, or the account's reward
-     * history for the current month.
+     * A simple "dummy" benefit availability policy that always returns true. Only useful for
+     * testing--a real availability policy might consider many factors such as the day of week of
+     * the dining, or the account's reward history for the current month.
      */
     private static class AlwaysReturnsTrue implements BenefitAvailabilityPolicy {
         public boolean isBenefitAvailableFor(Account account, Dining dining) {

@@ -1,16 +1,13 @@
 package rewards.internal.restaurant;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Loads restaurants from a data source using JPA.
- */
+/** Loads restaurants from a data source using JPA. */
 public class JpaRestaurantRepository implements RestaurantRepository {
 
     public static final String RESTAURANT_BY_MERCHANT_QUERY = //

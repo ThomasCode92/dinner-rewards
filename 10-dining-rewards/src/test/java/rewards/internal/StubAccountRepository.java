@@ -1,19 +1,19 @@
 package rewards.internal;
 
 import common.money.Percentage;
+import java.util.HashMap;
+import java.util.Map;
 import rewards.internal.account.Account;
 import rewards.internal.account.AccountRepository;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * A dummy account repository implementation. Has a single Account "Keith and Keri Donald" with two beneficiaries,
- * "Annabelle" (50% allocation) and "Corgan" (50% allocation) associated with credit card "1234123412341234".
- * <p>
- * Stubs facilitate unit testing. An object needing an AccountRepository can work with this stub and not have to bring
- * in expensive and/or complex dependencies such as a Database. Simple unit tests can then verify object behavior by
- * considering the state of this stub.
+ * A dummy account repository implementation. Has a single Account "Keith and Keri Donald" with two
+ * beneficiaries, "Annabelle" (50% allocation) and "Corgan" (50% allocation) associated with credit
+ * card "1234123412341234".
+ *
+ * <p>Stubs facilitate unit testing. An object needing an AccountRepository can work with this stub
+ * and not have to bring in expensive and/or complex dependencies such as a Database. Simple unit
+ * tests can then verify object behavior by considering the state of this stub.
  */
 public class StubAccountRepository implements AccountRepository {
 
@@ -29,7 +29,8 @@ public class StubAccountRepository implements AccountRepository {
     public Account findByCreditCard(String creditCardNumber) {
         Account account = accountsByCreditCard.get(creditCardNumber);
         if (account == null) {
-            throw new RuntimeException("no account has been found for credit card number " + creditCardNumber);
+            throw new RuntimeException(
+                    "no account has been found for credit card number " + creditCardNumber);
         }
         return account;
     }

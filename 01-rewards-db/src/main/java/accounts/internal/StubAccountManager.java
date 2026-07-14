@@ -1,24 +1,23 @@
 package accounts.internal;
 
 import common.money.Percentage;
-import rewards.internal.account.Account;
-import rewards.internal.account.Beneficiary;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicLong;
+import rewards.internal.account.Account;
+import rewards.internal.account.Beneficiary;
 
 /**
- * IMPORTANT: Per best practices, this class shouldn't be in 'src/main/java'
- * but rather in 'src/test/java'. However, it is used by many Test classes
- * inside multiple projects. Maven does not provide an easy way to access a
- * class that is inside another project's 'src/test/java' folder.
- * <p>
- * Rather than using some complex Maven configuration, we decided it is
- * acceptable to place this test class inside 'src/main/java'.
+ * IMPORTANT: Per best practices, this class shouldn't be in 'src/main/java' but rather in
+ * 'src/test/java'. However, it is used by many Test classes inside multiple projects. Maven does
+ * not provide an easy way to access a class that is inside another project's 'src/test/java'
+ * folder.
+ *
+ * <p>Rather than using some complex Maven configuration, we decided it is acceptable to place this
+ * test class inside 'src/main/java'.
  */
 public class StubAccountManager extends AbstractAccountManager {
 
@@ -81,7 +80,8 @@ public class StubAccountManager extends AbstractAccountManager {
     }
 
     @Override
-    public void updateBeneficiaryAllocationPercentages(Long accountId, Map<String, Percentage> allocationPercentages) {
+    public void updateBeneficiaryAllocationPercentages(
+            Long accountId, Map<String, Percentage> allocationPercentages) {
         Account account = accountsById.get(accountId);
         for (Entry<String, Percentage> entry : allocationPercentages.entrySet()) {
             account.getBeneficiary(entry.getKey()).setAllocationPercentage(entry.getValue());
@@ -94,10 +94,9 @@ public class StubAccountManager extends AbstractAccountManager {
     }
 
     @Override
-    public void removeBeneficiary(Long accountId, String beneficiaryName,
-                                  Map<String, Percentage> allocationPercentages) {
+    public void removeBeneficiary(
+            Long accountId, String beneficiaryName, Map<String, Percentage> allocationPercentages) {
         accountsById.get(accountId).removeBeneficiary(beneficiaryName);
         updateBeneficiaryAllocationPercentages(accountId, allocationPercentages);
     }
-
 }

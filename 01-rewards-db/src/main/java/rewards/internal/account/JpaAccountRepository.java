@@ -1,17 +1,15 @@
 package rewards.internal.account;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-/**
- * An account repository that uses JPA to find accounts.
- */
+/** An account repository that uses JPA to find accounts. */
 public class JpaAccountRepository implements AccountRepository {
 
-    public static final String ACCOUNT_BY_CC_QUERY = "select ACCOUNT_ID from T_ACCOUNT_CREDIT_CARD where NUMBER = :ccn";
+    public static final String ACCOUNT_BY_CC_QUERY =
+            "select ACCOUNT_ID from T_ACCOUNT_CREDIT_CARD where NUMBER = :ccn";
 
     public static final String INFO = "JPA";
 
@@ -36,9 +34,12 @@ public class JpaAccountRepository implements AccountRepository {
     public Account findByCreditCard(String creditCardNumber) {
         // Find id account of account with this credit-card using a direct
         // SQL query on the unmapped T_ACCOUNT_CREDIT_CARD table.
-        Integer accountId = (Integer) entityManager
-                .createNativeQuery(ACCOUNT_BY_CC_QUERY)
-                .setParameter("ccn", creditCardNumber).getSingleResult();
+        Integer accountId =
+                (Integer)
+                        entityManager
+                                .createNativeQuery(ACCOUNT_BY_CC_QUERY)
+                                .setParameter("ccn", creditCardNumber)
+                                .getSingleResult();
 
         Account account = entityManager.find(Account.class, accountId.longValue());
 
@@ -47,5 +48,4 @@ public class JpaAccountRepository implements AccountRepository {
 
         return account;
     }
-
 }

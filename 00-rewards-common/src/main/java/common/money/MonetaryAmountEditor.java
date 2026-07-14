@@ -1,12 +1,11 @@
 package common.money;
 
+import java.beans.PropertyEditorSupport;
 import org.springframework.util.StringUtils;
 
-import java.beans.PropertyEditorSupport;
-
 /**
- * A formatter for Monetary amount properties. Converts object values to well-formatted strings and strings back to
- * values. Usable by a data binding framework for binding user input to the model.
+ * A formatter for Monetary amount properties. Converts object values to well-formatted strings and
+ * strings back to values. Usable by a data binding framework for binding user input to the model.
  */
 public class MonetaryAmountEditor extends PropertyEditorSupport {
 
@@ -28,6 +27,4 @@ public class MonetaryAmountEditor extends PropertyEditorSupport {
             setValue(null);
         }
     }
-
-
 }

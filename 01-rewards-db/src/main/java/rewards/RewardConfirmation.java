@@ -3,8 +3,8 @@ package rewards;
 import java.io.Serializable;
 
 /**
- * A summary of a confirmed reward transaction describing a contribution made to an account that was distributed among
- * the account's beneficiaries.
+ * A summary of a confirmed reward transaction describing a contribution made to an account that was
+ * distributed among the account's beneficiaries.
  */
 @SuppressWarnings("serial")
 public class RewardConfirmation implements Serializable {
@@ -15,7 +15,7 @@ public class RewardConfirmation implements Serializable {
     /**
      * Creates a new reward confirmation.
      *
-     * @param confirmationNumber  the unique confirmation number
+     * @param confirmationNumber the unique confirmation number
      * @param accountContribution a summary of the account contribution that was made
      */
     public RewardConfirmation(String confirmationNumber, AccountContribution accountContribution) {
@@ -24,7 +24,8 @@ public class RewardConfirmation implements Serializable {
     }
 
     /**
-     * Returns the confirmation number of the reward transaction. Can be used later to look up the transaction record.
+     * Returns the confirmation number of the reward transaction. Can be used later to look up the
+     * transaction record.
      */
     public String getConfirmationNumber() {
         return confirmationNumber;

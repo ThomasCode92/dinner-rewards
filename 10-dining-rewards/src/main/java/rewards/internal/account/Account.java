@@ -3,21 +3,20 @@ package rewards.internal.account;
 import common.money.MonetaryAmount;
 import common.money.Percentage;
 import common.repository.Entity;
-import rewards.AccountContribution;
-import rewards.AccountContribution.Distribution;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import rewards.AccountContribution;
+import rewards.AccountContribution.Distribution;
 
 /**
- * An account for a member of the reward network. An account has one or more beneficiaries whose allocations must add up
- * to 100%.
- * <p>
- * An account can make contributions to its beneficiaries. Each contribution is distributed among the beneficiaries
- * based on an allocation.
- * <p>
- * An entity. An aggregate.
+ * An account for a member of the reward network. An account has one or more beneficiaries whose
+ * allocations must add up to 100%.
+ *
+ * <p>An account can make contributions to its beneficiaries. Each contribution is distributed among
+ * the beneficiaries based on an allocation.
+ *
+ * <p>An entity. An aggregate.
  */
 public class Account extends Entity {
 
@@ -28,30 +27,25 @@ public class Account extends Entity {
     private Set<Beneficiary> beneficiaries = new HashSet<Beneficiary>();
 
     @SuppressWarnings("unused")
-    private Account() {
-    }
+    private Account() {}
 
     /**
      * Create a new account.
      *
      * @param number the account number
-     * @param name   the name on the account
+     * @param name the name on the account
      */
     public Account(String number, String name) {
         this.number = number;
         this.name = name;
     }
 
-    /**
-     * Returns the number used to uniquely identify this account.
-     */
+    /** Returns the number used to uniquely identify this account. */
     public String getNumber() {
         return number;
     }
 
-    /**
-     * Returns the name on file for this account.
-     */
+    /** Returns the name on file for this account. */
     public String getName() {
         return name;
     }
@@ -68,7 +62,7 @@ public class Account extends Entity {
     /**
      * Add a single beneficiary with the specified allocation percentage.
      *
-     * @param beneficiaryName      the name of the beneficiary (should be unique)
+     * @param beneficiaryName the name of the beneficiary (should be unique)
      * @param allocationPercentage the beneficiary's allocation percentage within this account
      */
     public void addBeneficiary(String beneficiaryName, Percentage allocationPercentage) {
@@ -91,8 +85,8 @@ public class Account extends Entity {
     }
 
     /**
-     * Make a monetary contribution to this account. The contribution amount is distributed among the account's
-     * beneficiaries based on each beneficiary's allocation percentage.
+     * Make a monetary contribution to this account. The contribution amount is distributed among
+     * the account's beneficiaries based on each beneficiary's allocation percentage.
      *
      * @param amount the total amount to contribute
      */
@@ -114,10 +108,15 @@ public class Account extends Entity {
     private Set<Distribution> distribute(MonetaryAmount amount) {
         Set<Distribution> distributions = new HashSet<Distribution>(beneficiaries.size());
         for (Beneficiary beneficiary : beneficiaries) {
-            MonetaryAmount distributionAmount = amount.multiplyBy(beneficiary.getAllocationPercentage());
+            MonetaryAmount distributionAmount =
+                    amount.multiplyBy(beneficiary.getAllocationPercentage());
             beneficiary.credit(distributionAmount);
-            Distribution distribution = new Distribution(beneficiary.getName(), distributionAmount, beneficiary
-                    .getAllocationPercentage(), beneficiary.getSavings());
+            Distribution distribution =
+                    new Distribution(
+                            beneficiary.getName(),
+                            distributionAmount,
+                            beneficiary.getAllocationPercentage(),
+                            beneficiary.getSavings());
             distributions.add(distribution);
         }
         return distributions;
@@ -125,9 +124,9 @@ public class Account extends Entity {
 
     /**
      * Returns the beneficiaries for this account.
-     * <p>
-     * Callers should not attempt to hold on or modify the returned set. This method should only be used transitively;
-     * for example, called to facilitate account reporting.
+     *
+     * <p>Callers should not attempt to hold on or modify the returned set. This method should only
+     * be used transitively; for example, called to facilitate account reporting.
      *
      * @return the beneficiaries of this account
      */
@@ -136,8 +135,8 @@ public class Account extends Entity {
     }
 
     /**
-     * Used to restore an allocated beneficiary. Should only be called by the repository responsible for reconstituting
-     * this account.
+     * Used to restore an allocated beneficiary. Should only be called by the repository responsible
+     * for reconstituting this account.
      *
      * @param beneficiary the beneficiary
      */

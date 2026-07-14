@@ -2,16 +2,15 @@ package common.money;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import javax.persistence.Embeddable;
 
 /**
  * A percentage. Represented as a decimal value with scale 2 between 0.00 and 1.00.
- * <p>
- * A value object. Immutable.
+ *
+ * <p>A value object. Immutable.
  */
 @Embeddable
 public class Percentage implements Serializable {
@@ -21,9 +20,9 @@ public class Percentage implements Serializable {
     private BigDecimal value;
 
     /**
-     * Create a new percentage from the specified value. Value must be between 0 and 1. For example, value .45
-     * represents 45%. If the value has more than two digits past the decimal point, it will be rounded up. For example,
-     * value .24555 rounds up to .25.
+     * Create a new percentage from the specified value. Value must be between 0 and 1. For example,
+     * value .45 represents 45%. If the value has more than two digits past the decimal point, it
+     * will be rounded up. For example, value .24555 rounds up to .25.
      *
      * @param value the percentage value
      * @throws IllegalArgumentException if the value is not between 0 and 1
@@ -34,9 +33,10 @@ public class Percentage implements Serializable {
     }
 
     /**
-     * Create a new percentage from the specified double value. Converts it to a BigDecimal with exact precision. Value
-     * must be between 0 and 1. For example, value .45 represents 45%. If the value has more than two digits past the
-     * decimal point, it will be rounded up. For example, value .24555 rounds up to .25.
+     * Create a new percentage from the specified double value. Converts it to a BigDecimal with
+     * exact precision. Value must be between 0 and 1. For example, value .45 represents 45%. If the
+     * value has more than two digits past the decimal point, it will be rounded up. For example,
+     * value .24555 rounds up to .25.
      *
      * @param value the percentage value as a double
      * @throws IllegalArgumentException if the value is not between 0 and 1
@@ -46,8 +46,7 @@ public class Percentage implements Serializable {
     }
 
     @SuppressWarnings("unused")
-    private Percentage() {
-    }
+    private Percentage() {}
 
     /**
      * Convert the string representation of a percentage (e.g., 5% or 5) to a Percentage object.
@@ -71,16 +70,12 @@ public class Percentage implements Serializable {
         return new Percentage(value);
     }
 
-    /**
-     * Returns zero percent.
-     */
+    /** Returns zero percent. */
     public static Percentage zero() {
         return new Percentage(0);
     }
 
-    /**
-     * Returns one hundred percent.
-     */
+    /** Returns one hundred percent. */
     public static Percentage oneHundred() {
         return new Percentage(1);
     }
@@ -88,7 +83,8 @@ public class Percentage implements Serializable {
     private void initValue(BigDecimal value) {
         value = value.setScale(2, RoundingMode.HALF_UP);
         if (value.compareTo(BigDecimal.ZERO) < 0 || value.compareTo(BigDecimal.ONE) > 0) {
-            throw new IllegalArgumentException("Percentage value must be between 0 and 1; your value was " + value);
+            throw new IllegalArgumentException(
+                    "Percentage value must be between 0 and 1; your value was " + value);
         }
         this.value = value;
     }
@@ -105,7 +101,8 @@ public class Percentage implements Serializable {
     }
 
     /**
-     * Return this percentage as a double. Useful for when a double type is needed by an external API or system.
+     * Return this percentage as a double. Useful for when a double type is needed by an external
+     * API or system.
      *
      * @return this percentage as a double
      */
@@ -114,8 +111,8 @@ public class Percentage implements Serializable {
     }
 
     /**
-     * Return this percentage as a big decimal. Useful for when a big decimal type is needed by an external API or
-     * system.
+     * Return this percentage as a big decimal. Useful for when a big decimal type is needed by an
+     * external API or system.
      *
      * @return this percentage as a big decimal
      */

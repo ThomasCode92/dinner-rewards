@@ -1,18 +1,16 @@
 package rewards.internal.restaurant;
 
 /**
- * Load restaurant aggregates. Called by the reward network to find and
- * reconstitute Restaurant entities from an external form such as a set of RDMS
- * rows.
- * <p>
- * Objects returned by this repository are guaranteed to be fully-initialized
- * and ready to use.
+ * Load restaurant aggregates. Called by the reward network to find and reconstitute Restaurant
+ * entities from an external form such as a set of RDMS rows.
+ *
+ * <p>Objects returned by this repository are guaranteed to be fully-initialized and ready to use.
  */
 public interface RestaurantRepository {
 
     /**
-     * Indicates implementation being used. Actual implementation is hidden
-     * behind a proxy, so this makes it easy to determine when testing.
+     * Indicates implementation being used. Actual implementation is hidden behind a proxy, so this
+     * makes it easy to determine when testing.
      *
      * @return Implementation information.
      */

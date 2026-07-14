@@ -1,5 +1,7 @@
 package rewards.internal.account;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import config.AppConfig;
 import config.DbConfig;
 import org.junit.jupiter.api.Test;
@@ -8,13 +10,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
 /**
- * Integration test for the JPA-based account repository implementation.
- * Verifies that the JpaAccountRepository works with its underlying components
- * and that Spring is configuring things properly.
+ * Integration test for the JPA-based account repository implementation. Verifies that the
+ * JpaAccountRepository works with its underlying components and that Spring is configuring things
+ * properly.
  */
 @ActiveProfiles("jpa")
 @ExtendWith(SpringExtension.class)
@@ -24,7 +23,9 @@ public class JpaAccountRepositoryIntegrationTests extends AbstractAccountReposit
     @Test
     @Override
     public void testProfile() {
-        assertEquals(JpaAccountRepository.INFO, accountRepository.getInfo(), "JPA expected but found " + accountRepository.getInfo());
+        assertEquals(
+                JpaAccountRepository.INFO,
+                accountRepository.getInfo(),
+                "JPA expected but found " + accountRepository.getInfo());
     }
-
 }

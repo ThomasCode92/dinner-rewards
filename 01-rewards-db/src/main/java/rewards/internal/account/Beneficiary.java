@@ -2,7 +2,6 @@ package rewards.internal.account;
 
 import common.money.MonetaryAmount;
 import common.money.Percentage;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -13,9 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * A single beneficiary allocated to an account. Each beneficiary has a name
- * (e.g., Mary), an allocation percentage, and a savings balance tracking how much
- * money has been saved for them to date (e.g., $1000).
+ * A single beneficiary allocated to an account. Each beneficiary has a name (e.g., Mary), an
+ * allocation percentage, and a savings balance tracking how much money has been saved for them to
+ * date (e.g., $1000).
  */
 @Entity
 @Table(name = "T_ACCOUNT_BENEFICIARY")
@@ -37,13 +36,12 @@ public class Beneficiary {
     @AttributeOverride(name = "value", column = @Column(name = "SAVINGS"))
     private MonetaryAmount savings = MonetaryAmount.zero();
 
-    protected Beneficiary() {
-    }
+    protected Beneficiary() {}
 
     /**
      * Creates a new account beneficiary.
      *
-     * @param name                 the name of the beneficiary
+     * @param name the name of the beneficiary
      * @param allocationPercentage the beneficiary's allocation percentage within its account
      */
     public Beneficiary(String name, Percentage allocationPercentage) {
@@ -52,28 +50,25 @@ public class Beneficiary {
     }
 
     /**
-     * Creates a new account beneficiary. This constructor should be called by
-     * privileged objects responsible for reconstituting an existing Account
-     * object from some external form such as a collection of database records.
-     * Marked package-private to indicate this constructor should never be
-     * called by general application code.
+     * Creates a new account beneficiary. This constructor should be called by privileged objects
+     * responsible for reconstituting an existing Account object from some external form such as a
+     * collection of database records. Marked package-private to indicate this constructor should
+     * never be called by general application code.
      *
-     * @param name                 the name of the beneficiary
+     * @param name the name of the beneficiary
      * @param allocationPercentage the beneficiary's allocation percentage within its account
-     * @param savings              the total amount saved to-date for this beneficiary
+     * @param savings the total amount saved to-date for this beneficiary
      */
-    Beneficiary(String name, Percentage allocationPercentage,
-                MonetaryAmount savings) {
+    Beneficiary(String name, Percentage allocationPercentage, MonetaryAmount savings) {
         this.name = name;
         this.allocationPercentage = allocationPercentage;
         this.savings = savings;
     }
 
     /**
-     * Returns the entity identifier used to internally distinguish this entity
-     * among other entities of the same type in the system. Should typically
-     * only be called by privileged data access infrastructure code such as an
-     * Object Relational Mapper (ORM) and not by application code.
+     * Returns the entity identifier used to internally distinguish this entity among other entities
+     * of the same type in the system. Should typically only be called by privileged data access
+     * infrastructure code such as an Object Relational Mapper (ORM) and not by application code.
      *
      * @return the internal entity identifier
      */
@@ -82,9 +77,9 @@ public class Beneficiary {
     }
 
     /**
-     * Sets the internal entity identifier - should only be called by privileged
-     * data access code (repositories that work with an Object Relational Mapper
-     * (ORM)). Should never be set by application code explicitly.
+     * Sets the internal entity identifier - should only be called by privileged data access code
+     * (repositories that work with an Object Relational Mapper (ORM)). Should never be set by
+     * application code explicitly.
      *
      * @param entityId the internal entity identifier
      */
@@ -92,16 +87,12 @@ public class Beneficiary {
         this.entityId = entityId;
     }
 
-    /**
-     * Returns the beneficiary name.
-     */
+    /** Returns the beneficiary name. */
     public String getName() {
         return name;
     }
 
-    /**
-     * Returns the beneficiary's allocation percentage in this account.
-     */
+    /** Returns the beneficiary's allocation percentage in this account. */
     public Percentage getAllocationPercentage() {
         return allocationPercentage;
     }
@@ -115,9 +106,7 @@ public class Beneficiary {
         this.allocationPercentage = allocationPercentage;
     }
 
-    /**
-     * Returns the amount of savings this beneficiary has grown.
-     */
+    /** Returns the amount of savings this beneficiary has grown. */
     public MonetaryAmount getSavings() {
         return savings;
     }
@@ -132,7 +121,13 @@ public class Beneficiary {
     }
 
     public String toString() {
-        return "name = '" + name + "' (" + entityId + "), allocationPercentage = "
-                + allocationPercentage + ", savings = " + savings;
+        return "name = '"
+                + name
+                + "' ("
+                + entityId
+                + "), allocationPercentage = "
+                + allocationPercentage
+                + ", savings = "
+                + savings;
     }
 }
