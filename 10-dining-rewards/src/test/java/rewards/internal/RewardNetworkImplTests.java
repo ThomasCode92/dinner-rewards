@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import common.money.MonetaryAmount;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import rewards.AccountContribution;
 import rewards.Dining;
@@ -28,7 +27,6 @@ public class RewardNetworkImplTests {
     /** The object being tested. */
     private RewardNetworkImpl rewardNetwork;
 
-    // TODO-09: Review the test setup
     @BeforeEach
     public void setUp() {
         // Create stubs to facilitate fast in-memory testing with
@@ -41,11 +39,7 @@ public class RewardNetworkImplTests {
         rewardNetwork = new RewardNetworkImpl(accountRepo, restaurantRepo, rewardRepo);
     }
 
-    // TODO-10: Test RewardNetworkImpl class
-    // - Remove the @Disabled annotation below.
-    // - Run this JUnit test. Verify it passes.
     @Test
-    @Disabled
     public void testRewardForDining() {
         // create a new dining of 100.00 charged to credit card '1,234,123,412,341,234' by merchant
         // '123,457,890' as test input
